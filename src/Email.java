@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class Email {
@@ -8,37 +9,21 @@ public class Email {
     private int mailboxCapacity = 500;
     private String alternativeEmail;
     private String email;
-    private int defaultPasswordLength = 10;
-    private String companySuffix = "secondgoogle.hhz";
+    private final String COMPANY_SUFFIX = "secondgoogle.hhz";
 
     public Email(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        System.out.println("E-MAIL FOR " + this.firstName + " " + this.lastName + " CREATED");
-
         this.department = setDepartment();
-
-        //TODO String.format
-        this.email = this.firstName.toLowerCase() + "." + this.lastName.toLowerCase() + "@" + this.department +
-                companySuffix;
-        System.out.println("YOUR E-MAIL: " + this.email);
-
-        this.password = createPassword(defaultPasswordLength);
-        System.out.println("SAVE YOUR PASSWORD: " + this.password);
+        this.email = String.format("%s.%s@%s.%s", this.firstName.toLowerCase(), this.lastName.toLowerCase(),
+                                   this.department, COMPANY_SUFFIX);
+        this.password = createPassword();
 
     }
 
     private String setDepartment() {
-        //TODO убрать NONE, придумать парочку
         Scanner scanner = new Scanner(System.in);
-        System.out.println("""
-                CHOOSE NEW EMPLOYEE'S DEPARTMENT
-                1. FINANCE
-                2. SECURITY
-                3. HR
-                4. DEVELOPING
-                5. MARKETING
-                6. NONE""");
+        System.out.println(Utils.chooseDepMessage);
         while (true) {
             int depChoise = scanner.nextInt();
             switch (depChoise) {
@@ -53,22 +38,24 @@ public class Email {
                 case 5:
                     return "marketing";
                 case 6:
-                    return "";
+                    return "god";
+                case 7:
+                    return "logistics";
+                case 8:
+                    return "production";
                 default:
                     System.out.println("PLEASE, CHOOSE A VALID OPTION FROM 1 TO 6");
             }
         }
     }
 
-    // TODO переделать createPassword метод
-    private String createPassword(int length) {
-        String passwordSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+";
-        char[] password = new char[length];
-        for (int i = 0; i < length; i++) {
-            int random = (int) (Math.random() * passwordSet.length());
-            password[i] = passwordSet.charAt(random);
+    private String createPassword() {
+        Random random = new Random();
+        char[] charArray = new char[12];
+        for (int i = 0; i < 12; i++) {
+            charArray[i] = Utils.letters.charAt(random.nextInt(64));
         }
-        return String.valueOf(password);
+        return String.valueOf(charArray);
     }
 
     public void setMailboxCapacity(int capacity) {
@@ -95,11 +82,13 @@ public class Email {
         return password;
     }
 
-    public void printInfo(){
-        //TODO String.format()
-        System.out.println("""
-                NAME: 
-                SURNAME: 
-                MAILBOX CAPACITY: """);
+    public void printInfo() {
+        System.out.printf("""
+                NAME: %s
+                SURNAME: %s
+                E-MAIL: %s
+                PASSWORD: %s
+                MAILBOX CAPACITY: %d MB
+                """, this.firstName, this.lastName, this.email, this.password, this.mailboxCapacity);
     }
 }
