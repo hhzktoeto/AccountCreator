@@ -8,7 +8,6 @@ public class AccountCreator {
         String firstName = scanner.nextLine();
         System.out.println("ENTER THE SURNAME");
         String lastName = scanner.nextLine();
-        scanner.close();
 
         Email test = new Email(firstName, lastName);
         test.printInfo();

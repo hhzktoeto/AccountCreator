@@ -6,7 +6,7 @@ public class Email {
     private String lastName;
     private String password;
     private String department;
-    private int mailboxCapacity = 500;
+    private int mailboxCapacity;
     private String alternativeEmail;
     private String email;
     private final String COMPANY_SUFFIX = "secondgoogle.hhz";
@@ -18,7 +18,7 @@ public class Email {
         this.email = String.format("%s.%s@%s.%s", this.firstName.toLowerCase(), this.lastName.toLowerCase(),
                                    this.department, COMPANY_SUFFIX);
         this.password = createPassword();
-
+        this.mailboxCapacity = setMailboxCapacity();
     }
 
     private String setDepartment() {
@@ -58,8 +58,12 @@ public class Email {
         return String.valueOf(charArray);
     }
 
-    public void setMailboxCapacity(int capacity) {
-        this.mailboxCapacity = capacity;
+    public int setMailboxCapacity() {
+        if (this.department.equals("hr") || this.department.equals("logistics") || this.department.equals("security")) {
+            return 2000;
+        } else {
+            return 750;
+        }
     }
 
     public void setAlternativeEmail(String alternativeEmail) {
