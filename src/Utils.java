@@ -1,5 +1,8 @@
 public class Utils {
 
+    private Utils() {
+    }
+
     static String chooseDepMessage = """
                 CHOOSE NEW EMPLOYEE'S DEPARTMENT
                 1. FINANCE

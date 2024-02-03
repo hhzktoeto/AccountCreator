@@ -70,6 +70,10 @@ public class Email {
         this.password = password;
     }
 
+    public String getEmail () {
+        return this.email;
+    }
+
     public int getMailboxCapacity() {
         return mailboxCapacity;
     }
