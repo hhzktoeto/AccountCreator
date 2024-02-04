@@ -4,9 +4,9 @@ public class AccountCreator {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("ENTER THE NAME");
+        System.out.print("ENTER THE NAME: ");
         String firstName = scanner.nextLine();
-        System.out.println("ENTER THE SURNAME");
+        System.out.print("ENTER THE SURNAME: ");
         String lastName = scanner.nextLine();
 
         Email test = new Email(firstName, lastName);
