@@ -12,6 +12,7 @@ public class AccountCreator {
         Email test = new Email(firstName, lastName);
         test.printInfo();
         DataBase.addEmployee(1, test);
+        DataBase.addEmployee(1, test);
         DataBase.addLoginInfo(test.getEmail(), test.getPassword());
     }
 }
